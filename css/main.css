@@ -67,14 +67,14 @@ body {
 .edit-icon {
   color: var(--mainBlue);
   cursor: pointer;
-  font-size: .9rem;
+  font-size: 1rem;
   text-decoration: none !important;
 }
 
 .delete-icon {
   color: var(--mainRed);
   cursor: pointer;
-  font-size: .9rem;
+  font-size: 1rem;
   text-decoration: none !important;
 }
 

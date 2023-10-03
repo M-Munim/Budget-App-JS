@@ -30,7 +30,7 @@ class UI {
       // setting time for the removal of err msg
       setTimeout(() => {
         self.budgetFeedback.classList.remove("showItem")
-      }, 3000);
+      }, 2000);
     }
 
     // passing the value 
@@ -73,7 +73,7 @@ class UI {
       const self = this;
       setTimeout(() => {
         self.expenseFeedback.classList.remove("showItem")
-      }, 3000);
+      }, 2000);
     }
     else {
       let amount = parseInt(amountValue);
@@ -102,9 +102,7 @@ class UI {
 
          <h6 class="expense-title mb-0 text-uppercase list-item">${expense.title}</h6>
          <h5 class="expense-amount mb-0 list-item">${expense.amount}</h5>
-
          <div class="expense-icons list-item">
-
           <a href="#" class="edit-icon mx-2" data-id="${expense.id}">
            <i class="fas fa-edit"></i>
           </a>
@@ -121,10 +119,9 @@ class UI {
     let total = 0;
     if (this.itemList.length > 0) {
       total = this.itemList.reduce(function (acc, currVal) {
-        console.log(`total is ${acc} ant he current value is ${currVal}`);
+        // console.log(`total is ${acc} ant he current value is ${currVal}`);
 
         acc += currVal.amount;
-
         return acc;
       }, 0)
     }
@@ -134,12 +131,45 @@ class UI {
 
   // editExpense
   editExpense(element) {
+    let id = parseInt(element.dataset.id);
+    let parent = element.parentElement.parentElement.parentElement;
 
+    // remove from dom
+    this.expenseList.removeChild(parent);
+
+    // remove from the list
+    let expense = this.itemList.filter(function (item) {
+      return item.id === id;
+    });
+
+    // show value
+    this.expenseInput.value = expense[0].title;
+    this.amountInput.value = expense[0].amount;
+
+    //remove from list
+    let tempList = this.itemList.filter(function (item) {
+      return item.id !== id;
+    });
+
+    this.itemList = tempList;
+    this.showBalance();
   }
 
   // deleteExpense
   deleteExpense(element) {
+    let id = parseInt(element.dataset.id);
+    let parent = element.parentElement.parentElement.parentElement;
 
+    // remove from dom
+    this.expenseList.removeChild(parent);
+
+    //remove from list
+    let tempList = this.itemList.filter(function (item) {
+      return item.id !== id;
+    });
+
+    this.itemList = tempList;
+    this.showBalance();
   }
 }
 
